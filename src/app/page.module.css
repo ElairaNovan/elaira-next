@@ -139,3 +139,9 @@ a.secondary {
     --button-secondary-border: #1a1a1a;
   }
 }
+/* === Общий контейнер сайта === */
+.site-frame {
+  max-width: 1680px;
+  margin-inline: auto;
+  padding-inline: 0.75rem;
+}

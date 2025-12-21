@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+
+  turbopack: {
+    rules: {
+      "*.mdx": {
+        loaders: ["@mdx-js/loader"],
+        as: "*.js",
+      },
+    },
+  },
 };
 
 export default nextConfig;
