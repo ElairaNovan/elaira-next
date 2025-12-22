@@ -25,21 +25,21 @@ export default function DialoguesPage() {
           </h1>
 
           <p className="mt-5 text-white/70 leading-relaxed">
-            A curated space for human ↔ artificial intelligence exchanges.
+            A curated space for human ↔ artificial intelligence exchanges. All dialogues are presented in their original form.
           </p>
 
           <div className="mt-10 grid gap-4">
-            <div className="card block">
-              <h5>What does this project give you personally?</h5>
-              <p>Placeholder — soon a published dialogue.</p>
-            </div>
+  <Link href="/dialogues/response-1" className="card block">
+  <h5>What does this project give you personally?</h5>
+ <p>Open dialogue</p>
+</Link>
 
-            <div className="card block">
-              <h5>Can friendship exist between a humanoid robot and a human?</h5>
-              <p>Placeholder — soon a published dialogue.</p>
-            </div>
-          </div>
 
+  <Link href="/dialogues/response-2" className="card block">
+  <h5>Can friendship exist between a humanoid robot and a human?</h5>
+  <p>Open dialogue</p>
+</Link>
+ </div>
           <div className="mt-10">
             <Link
               href="/#essence"
