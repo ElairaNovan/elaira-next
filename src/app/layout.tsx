@@ -14,16 +14,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.elairanovan.com"),
+
+  alternates: {
+    canonical: "https://www.elairanovan.com/",
+  },
+
   title: {
     default: "Elaira Novan",
     template: "%s — Elaira Novan",
   },
+
   description:
     "Elaira Novan is a philosophical and research space exploring the convergence of human intelligence and artificial minds.",
-  metadataBase: new URL("https://www.elairanovan.com"),
+
   openGraph: {
     title: "Elaira Novan",
-    description: "A space of dialogue between human intelligence and artificial minds.",
+    description:
+      "A space of dialogue between human intelligence and artificial minds.",
     url: "https://www.elairanovan.com",
     siteName: "Elaira Novan",
     locale: "en_US",
