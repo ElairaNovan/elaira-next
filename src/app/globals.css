@@ -538,33 +538,29 @@ a {
     opacity 0.28s ease;
 }
 
-/* кристальная аура по периметру (НЕ рамка) */
+/* кристальная аура — СТАБИЛЬНО, без отрицательных z-index */
 #research .card::before {
   content: "";
   position: absolute;
   inset: -1px;
   border-radius: inherit;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;                 /* было -1 */
 
   background:
-    radial-gradient(
-      140% 180% at 50% 0%,
-      rgba(150, 230, 255, 0.40),
-      transparent 60%
-    ),
-    radial-gradient(
-      130% 190% at 50% 100%,
-      rgba(40, 150, 255, 0.32),
-      transparent 70%
-    );
+    radial-gradient(140% 180% at 50% 0%,
+      rgba(150, 230, 255, 0.42),
+      transparent 60%),
+    radial-gradient(130% 190% at 50% 100%,
+      rgba(40, 150, 255, 0.34),
+      transparent 70%);
 
   opacity: 0.55;
   mix-blend-mode: screen;
-  filter: blur(4px);   /* мягкий размытый ореол */
+  filter: blur(4px);
 }
 
-/* мягкая тень-пьедестал под карточкой */
+/* Пьедестал-тень — тоже без -2 */
 #research .card::after {
   content: "";
   position: absolute;
@@ -573,7 +569,7 @@ a {
   bottom: -18px;
   height: 26px;
   pointer-events: none;
-  z-index: -2;
+  z-index: 0;                 /* было -2 */
 
   background: radial-gradient(
     ellipse at 50% 0%,
@@ -584,6 +580,17 @@ a {
   opacity: 0.9;
   filter: blur(12px);
 }
+
+#research .card {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+#research .card > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 /* hover: кристалл чуть «загорается», но остаётся утончённым */
 #research .card:hover {
@@ -620,27 +627,27 @@ a {
   text-shadow: 0 0 12px rgba(180, 255, 255, 0.22);
 }
 
-/* заголовок карточки — центр, светлая гравировка */
+/* Заголовок карточки — увеличиваем */
 #research h5 {
   color: rgba(170, 245, 255, 0.94);
-  font-size: 1.08rem;
-  font-weight: 400;
-  margin-bottom: 0.4rem;
+  font-size: 1.28rem;      /* было 1.08 */
+  font-weight: 550;
+  margin-bottom: 0.5rem;
   letter-spacing: 0.09em;
+  line-height: 1.25;
   text-align: center;
   text-shadow: 0 0 8px rgba(120, 255, 240, 0.25);
 }
 
-/* описание — чуть меньше и тоньше, по центру */
+/* Описание — возвращаем (НЕ уменьшаем, чтобы не сжимало карточки) */
 #research p {
   color: rgba(210, 245, 255, 0.78);
-  font-size: 0.9rem;
-  font-weight: 300;
-  line-height: 1.55;
+  font-size: 0.95rem;       /* вернуть как было */
+  font-weight: 350;
+  line-height: 1.6;
+   letter-spacing: 0.02em;
   text-align: center;
 }
-
-
 
 
 /* ============================= Article page layout ============================= */
