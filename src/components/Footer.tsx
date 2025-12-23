@@ -3,7 +3,8 @@ import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer} role="contentinfo">
+    <footer id="footer" className={styles.footer} role="contentinfo">
+
       <div className={`site-frame ${styles.inner}`}>
         {/* LEFT */}
         <div className={styles.left}>
