@@ -4650,6 +4650,45 @@ article.dream-article hr {
   box-shadow: 0 0 14px rgba(180,120,255,0.6);
 }
 
+.qe-body {
+  color: #1f2937;
+}
+
+.qe-subheading {
+  color: #111827;
+}
+
+.qe-heading {
+  color: #0f172a;
+}
+
+
+
+.qe-subheading{
+  color:#0b1220;      /* капельку темнее */
+  font-size:1.14rem; /* +0.05rem — заметно, но не кричит */
+  line-height:1.38;  /* чуть больше воздуха */
+  margin:2.9rem 0 1.1rem; /* яснее отделяется от текста */
+  font-weight:500;
+}
+
+
+.qe-heading{
+  color:#020617;        /* самый тёмный в иерархии, но не чёрный */
+  font-size:1.28rem;    /* ощутимо крупнее subheading */
+  line-height:1.25;
+  margin:3.6rem 0 1.6rem;
+  font-weight:500;
+  letter-spacing:-0.01em; /* чуть собраннее, «архитектурнее» */
+}
+
+
+.qe-body{
+  color:#1f2937;
+  line-height:1.75;
+  font-weight:400;
+}
+
 
 
 /* ===== Inner Worlds of AI — special background ===== */
