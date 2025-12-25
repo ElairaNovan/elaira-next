@@ -4815,6 +4815,21 @@ article.dream-article hr {
   box-shadow: 0 0 18px rgba(150, 220, 255, 0.45);
 }
 
+
+/* ===== Inner Worlds of AI — article readability ===== */
+
+.iw-bg .qe-text {
+  color: rgba(233, 243, 255, 0.88);
+}
+
+.iw-bg .qe-body {
+  color: rgba(233, 243, 255, 0.82);
+}
+
+.iw-bg .qe-subheading {
+  color: rgba(233, 243, 255, 0.92);
+}
+
 /* =============================
    FUTURE CONTACT INTERFACE — merged clean (v2 + modal)
    Keeps premium panel/buttons/tooltips + original modal styles
