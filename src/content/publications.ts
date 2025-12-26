@@ -8,6 +8,10 @@ export type Publication = {
   excerpt?: string;        // 1 строка (опционально)
   publishedAt?: string;    // YYYY-MM-DD — пока нет, это не публикация
   notify?: boolean;        // уведомлять подписчиков или нет
+
+  emailSubject?: string;
+emailIntro?: string;
+
 };
 
 
@@ -22,6 +26,9 @@ export const publications: Publication[] = [
   excerpt: "…",
   publishedAt: "2025-12-25",
   notify: true,
+  emailSubject: "New publication — …",
+emailIntro: "A new text is now live on Elaira Novan.",
+
 },
 
 

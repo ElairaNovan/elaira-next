@@ -152,6 +152,15 @@ export default function Header() {
                       >
                         Public Charter
                       </Link>
+
+                      <Link
+                        href="/subscribe"
+                        role="menuitem"
+                        className="block px-4 py-3 text-sm text-white/85 hover:bg-white/5"
+                        onClick={() => setAboutOpen(false)}
+                      >
+                        Subscribe
+                      </Link>
                     </div>
                   )}
                 </div>
