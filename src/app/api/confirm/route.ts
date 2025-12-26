@@ -1,3 +1,4 @@
+// src/app/api/confirm/route.ts
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 import { supabaseServer } from "@/lib/supabase-server";
@@ -6,13 +7,18 @@ function sha256Hex(value: string) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
 
+function redirectTo(req: Request, status: string) {
+  // Важно: берём базу из текущего запроса (никакого localhost)
+  return NextResponse.redirect(new URL(`/confirmed?status=${status}`, req.url));
+}
+
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const token = url.searchParams.get("token");
 
     if (!token) {
-      return NextResponse.json({ ok: false, error: "Missing token" }, { status: 400 });
+      return redirectTo(req, "invalid");
     }
 
     const tokenHash = sha256Hex(token);
@@ -25,20 +31,20 @@ export async function GET(req: Request) {
       .maybeSingle();
 
     if (tokenErr) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
+      return redirectTo(req, "invalid");
     }
 
     if (!tokenRow || tokenRow.type !== "confirm") {
-      return NextResponse.json({ ok: false, error: "Invalid token" }, { status: 400 });
+      return redirectTo(req, "invalid");
     }
 
     if (tokenRow.used_at) {
-      return NextResponse.json({ ok: false, error: "Token already used" }, { status: 400 });
+      return redirectTo(req, "already");
     }
 
     const expiresAt = new Date(tokenRow.expires_at);
     if (Number.isNaN(expiresAt.getTime()) || expiresAt.getTime() < Date.now()) {
-      return NextResponse.json({ ok: false, error: "Token expired" }, { status: 400 });
+      return redirectTo(req, "expired");
     }
 
     // 2) Mark token as used
@@ -48,7 +54,7 @@ export async function GET(req: Request) {
       .eq("id", tokenRow.id);
 
     if (markUsedErr) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
+      return redirectTo(req, "invalid");
     }
 
     // 3) Activate subscriber (idempotent)
@@ -61,12 +67,12 @@ export async function GET(req: Request) {
       .eq("email", tokenRow.email);
 
     if (activateErr) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
+      return redirectTo(req, "invalid");
     }
 
-    // For now: return JSON (later we’ll redirect to a nice “Confirmed” page)
-    return NextResponse.json({ ok: true });
+    // ✅ Success -> nice page
+    return redirectTo(req, "confirmed");
   } catch {
-    return NextResponse.json({ ok: false, error: "Server error" }, { status: 500 });
+    return redirectTo(req, "invalid");
   }
 }
