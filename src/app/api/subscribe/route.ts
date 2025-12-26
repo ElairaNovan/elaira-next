@@ -28,10 +28,11 @@ export async function POST(req: Request) {
 
 await resend.emails.send({
   from: "Elaira Novan <onboarding@resend.dev>",
-  to: "test@example.com", // ← поставь СВОЮ почту
+  to: "zoluwkausa@gmail.com", // ← ТВОЯ реальная почта
   subject: "Resend test",
   html: "<p>Resend works ✅</p>",
 });
+
 
 
     if (typeof emailRaw !== "string") {
