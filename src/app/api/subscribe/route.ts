@@ -48,7 +48,9 @@ export async function POST(req: Request) {
     // 1) Upsert subscriber as pending
     const { error: upsertError } = await supabaseServer
       .from("subscribers")
-      .upsert({ email, status: "pending" }, { onConflict: "email" });
+      .upsert({ email, status: "unconfirmed" }, { onConflict: "email" });
+
+
 
     if (upsertError) {
       return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });

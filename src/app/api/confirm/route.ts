@@ -61,9 +61,10 @@ export async function GET(req: Request) {
     const { error: activateErr } = await supabaseServer
       .from("subscribers")
       .update({
-        status: "active",
-        confirmed_at: new Date().toISOString(),
-      })
+  status: "confirmed",
+  confirmed_at: new Date().toISOString(),
+})
+
       .eq("email", tokenRow.email);
 
     if (activateErr) {
