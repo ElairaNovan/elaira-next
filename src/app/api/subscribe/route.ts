@@ -86,7 +86,8 @@ export async function POST(req: Request) {
 
     // 4) Send email
     await resend.emails.send({
-      from: "Elaira Novan <onboarding@resend.dev>",
+      from: "Elaira Novan <hello@elairanovan.com>",
+
       to: email,
       subject: "Confirm your subscription",
       html: `
