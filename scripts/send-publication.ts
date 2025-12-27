@@ -1,4 +1,6 @@
 // scripts/send-publication.ts
+import dotenv from "dotenv";
+dotenv.config({ path: ".env.local" });
 
 import { Resend } from "resend";
 import { publications } from "../src/content/publications";
