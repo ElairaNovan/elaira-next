@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Elaira Novan — Subscription System
 
-## Getting Started
+This project implements an email subscription system with double opt-in confirmation
+and secure token-based unsubscribe.
 
-First, run the development server:
+## What exists in the project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Routes (API):
+- POST /api/subscribe — creates a confirm token and sends confirmation email
+- GET  /api/confirm?token=... — confirms subscription (never unsubscribes)
+- POST /api/unsubscribe — creates an unsubscribe token (optional utility endpoint)
+- GET  /api/unsubscribe?token=... — unsubscribes using a single-use token
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Pages (UI):
+- /subscribe — subscription page (shows status via query param)
+- /unsubscribe — unsubscribe result page (shows status via query param)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Database tables (Supabase):
+- subscribers — stores email + status (unconfirmed / confirmed / unsubscribed)
+- email_tokens — stores token hashes with type (confirm / unsubscribe), expires_at, used_at
+- notifications_sent — used later for publication notifications (idempotency)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Subscribe flow (double opt-in)
 
-## Learn More
+/subscribe
+→ POST /api/subscribe
+→ upsert into subscribers (status="unconfirmed")
+→ insert into email_tokens (type="confirm", token_hash, expires_at)
+→ send email with:
+   - confirm link: /api/confirm?token=...
+   - unsubscribe link: /api/unsubscribe?token=...
 
-To learn more about Next.js, take a look at the following resources:
+## Confirm flow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+GET /api/confirm?token=...
+- token must exist in email_tokens
+- token type must be "confirm"
+- token must not be expired or used
+- mark token used
+- update subscribers:
+  status="confirmed"
+  confirmed_at=now
+  unsubscribed_at=null
+- redirect to /subscribe?status=confirmed (or invalid/expired/already)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Rule:
+Confirm flow NEVER unsubscribes users.
 
-## Deploy on Vercel
+## Unsubscribe flow
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+GET /api/unsubscribe?token=...
+- token must exist in email_tokens
+- token type must be "unsubscribe"
+- token must not be expired or used
+- mark token used
+- update subscribers:
+  status="unsubscribed"
+  unsubscribed_at=now
+- redirect to /unsubscribe?status=success (or invalid/expired/already)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Token rules
+
+- Only token hashes are stored in DB (token_hash)
+- Plain tokens are only present in email links
+- Tokens are single-use (used_at)
+- Tokens expire (expires_at)
+
+## Status values used in UI
+
+status can be:
+- success
+- confirmed
+- already
+- expired
+- invalid
