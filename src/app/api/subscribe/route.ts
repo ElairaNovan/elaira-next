@@ -89,7 +89,8 @@ export async function POST(req: Request) {
       from: "Elaira Novan <hello@elairanovan.com>",
 
       to: email,
-      subject: "Confirm your subscription",
+      subject: "🔔 Уведомления о новых статьях",
+
       html: `
         <h2>Confirm your subscription</h2>
         <p>You requested to receive updates from Elaira Novan.</p>
