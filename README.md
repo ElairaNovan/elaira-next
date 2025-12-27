@@ -58,6 +58,11 @@ GET /api/unsubscribe?token=...
   unsubscribed_at=now
 - redirect to /unsubscribe?status=success (or invalid/expired/already)
 
+Note:
+Unsubscribe can be triggered directly from email link (GET),
+without requiring any form submission.
+
+
 ## Token rules
 
 - Only token hashes are stored in DB (token_hash)
