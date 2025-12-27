@@ -85,19 +85,23 @@ export async function POST(req: Request) {
     const confirmUrl = `${origin}/api/confirm?token=${token}`;
 
     // 4) Send email
-    await resend.emails.send({
-      from: "Elaira Novan <hello@elairanovan.com>",
+  await resend.emails.send({
+  from: "Elaira Novan <hello@elairanovan.com>",
+  to: email,
+  subject: "Confirm your subscription",
 
-      to: email,
-      subject: "🔔 Уведомления о новых статьях",
+  text: `Confirm your subscription.
+You requested to receive updates from Elaira Novan.
+Confirm subscription: ${confirmUrl}
+If you didn't request this, just ignore this email.`,
 
-      html: `
-        <h2>Confirm your subscription</h2>
-        <p>You requested to receive updates from Elaira Novan.</p>
-        <p><a href="${confirmUrl}">Confirm subscription</a></p>
-        <p>If you didn’t request this, just ignore this email.</p>
-      `,
-    });
+  html: `
+    <h2>Confirm your subscription</h2>
+    <p>You requested to receive updates from Elaira Novan.</p>
+    <p><a href="${confirmUrl}">Confirm subscription</a></p>
+    <p>If you didn't request this, just ignore this email.</p>
+  `,
+});
 
     return NextResponse.json({ ok: true });
   } catch (e) {
