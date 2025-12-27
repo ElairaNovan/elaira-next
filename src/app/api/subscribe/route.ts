@@ -84,24 +84,59 @@ export async function POST(req: Request) {
     const origin = process.env.SITE_URL || getOriginFromRequest(req);
     const confirmUrl = `${origin}/api/confirm?token=${token}`;
 
-    // 4) Send email
-  await resend.emails.send({
+// create unsubscribe token
+const unsubscribeToken = crypto.randomBytes(32).toString("hex");
+const unsubscribeTokenHash = sha256Hex(unsubscribeToken);
+const unsubscribeExpiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30); // 30 days
+
+await supabaseServer.from("email_tokens").insert({
+  email,
+  type: "unsubscribe",
+  token_hash: unsubscribeTokenHash,
+  expires_at: unsubscribeExpiresAt.toISOString(),
+});
+
+const unsubscribeUrl = `${origin}/api/unsubscribe?token=${unsubscribeToken}`;
+
+
+
+    await resend.emails.send({
   from: "Elaira Novan <hello@elairanovan.com>",
   to: email,
   subject: "Confirm your subscription",
 
   text: `Confirm your subscription.
 You requested to receive updates from Elaira Novan.
-Confirm subscription: ${confirmUrl}
-If you didn't request this, just ignore this email.`,
+
+Confirm subscription:
+${confirmUrl}
+
+If you didn't request this, just ignore this email.
+
+Unsubscribe:
+${unsubscribeUrl}
+`,
 
   html: `
     <h2>Confirm your subscription</h2>
+
     <p>You requested to receive updates from Elaira Novan.</p>
-    <p><a href="${confirmUrl}">Confirm subscription</a></p>
-    <p>If you didn't request this, just ignore this email.</p>
+
+    <p>
+      <a href="${confirmUrl}">Confirm subscription</a>
+    </p>
+
+    <hr style="margin:24px 0;border:none;border-top:1px solid #e5e7eb;" />
+
+    <p style="font-size:13px;color:#6b7280;">
+      If you no longer wish to receive these emails, you can
+      <a href="${unsubscribeUrl}" style="color:#6b7280;text-decoration:underline;">
+        unsubscribe here
+      </a>.
+    </p>
   `,
 });
+
 
     return NextResponse.json({ ok: true });
   } catch (e) {

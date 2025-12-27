@@ -14,6 +14,64 @@ function sha256Hex(value: string) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
 
+function redirectTo(req: Request, status: string) {
+  const origin = new URL(req.url).origin;
+  return NextResponse.redirect(`${origin}/unsubscribe?status=${status}`);
+}
+
+export async function GET(req: Request) {
+  try {
+    const url = new URL(req.url);
+    const token = url.searchParams.get("token");
+
+    if (!token) return redirectTo(req, "invalid");
+
+    const tokenHash = sha256Hex(token);
+
+    const { data: tokenRow, error: tokenErr } = await supabaseServer
+      .from("email_tokens")
+      .select("id, email, type, expires_at, used_at")
+      .eq("token_hash", tokenHash)
+      .maybeSingle();
+
+    if (tokenErr) return redirectTo(req, "invalid");
+    if (!tokenRow || tokenRow.type !== "unsubscribe") return redirectTo(req, "invalid");
+
+    if (tokenRow.used_at) return redirectTo(req, "already");
+
+    const expiresAt = new Date(tokenRow.expires_at);
+    if (Number.isNaN(expiresAt.getTime()) || expiresAt.getTime() < Date.now()) {
+      return redirectTo(req, "expired");
+    }
+
+    // 1) mark token as used
+    const { error: markUsedErr } = await supabaseServer
+      .from("email_tokens")
+      .update({ used_at: new Date().toISOString() })
+      .eq("id", tokenRow.id);
+
+    if (markUsedErr) return redirectTo(req, "invalid");
+
+    // 2) unsubscribe subscriber (idempotent)
+    const nowIso = new Date().toISOString();
+    const { error: unsubErr } = await supabaseServer
+      .from("subscribers")
+      .update({
+        status: "unsubscribed",
+        unsubscribed_at: nowIso,
+      })
+      .eq("email", tokenRow.email);
+
+    if (unsubErr) return redirectTo(req, "invalid");
+
+    return redirectTo(req, "success");
+  } catch {
+    return redirectTo(req, "invalid");
+  }
+}
+
+
+
 export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => null);

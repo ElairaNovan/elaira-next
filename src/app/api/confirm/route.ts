@@ -8,9 +8,10 @@ function sha256Hex(value: string) {
 }
 
 function redirectTo(req: Request, status: string) {
-  // Важно: берём базу из текущего запроса (никакого localhost)
-  return NextResponse.redirect(new URL(`/confirmed?status=${status}`, req.url));
+  const origin = new URL(req.url).origin;
+  return NextResponse.redirect(`${origin}/subscribe?status=${status}`);
 }
+
 
 export async function GET(req: Request) {
   try {

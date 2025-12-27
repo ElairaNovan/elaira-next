@@ -7,17 +7,17 @@ function sha256Hex(value: string) {
 }
 
 function redirectTo(req: Request, status: string) {
-  return NextResponse.redirect(new URL(`/unsubscribe?status=${status}`, req.url));
+  const origin = new URL(req.url).origin;
+  return NextResponse.redirect(`${origin}/subscribe?status=${status}`);
 }
+
 
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const token = url.searchParams.get("token");
 
-    if (!token) {
-      return redirectTo(req, "invalid");
-    }
+    if (!token) return redirectTo(req, "invalid");
 
     const tokenHash = sha256Hex(token);
 
@@ -27,48 +27,40 @@ export async function GET(req: Request) {
       .eq("token_hash", tokenHash)
       .maybeSingle();
 
-    if (tokenErr) {
-      return redirectTo(req, "invalid");
-    }
+    if (tokenErr) return redirectTo(req, "invalid");
 
-    if (!tokenRow || tokenRow.type !== "unsubscribe") {
-      return redirectTo(req, "invalid");
-    }
+    // ✅ confirm должен принимать только confirm-токены
+    if (!tokenRow || tokenRow.type !== "confirm") return redirectTo(req, "invalid");
 
-    if (tokenRow.used_at) {
-      return redirectTo(req, "already");
-    }
+    if (tokenRow.used_at) return redirectTo(req, "already");
 
     const expiresAt = new Date(tokenRow.expires_at);
     if (Number.isNaN(expiresAt.getTime()) || expiresAt.getTime() < Date.now()) {
       return redirectTo(req, "expired");
     }
 
-    // Mark token as used
+    // 1) mark token used
     const { error: markUsedErr } = await supabaseServer
       .from("email_tokens")
       .update({ used_at: new Date().toISOString() })
       .eq("id", tokenRow.id);
 
-    if (markUsedErr) {
-      return redirectTo(req, "invalid");
-    }
+    if (markUsedErr) return redirectTo(req, "invalid");
 
-    // Unsubscribe subscriber (idempotent)
+    // 2) confirm subscriber (idempotent)
     const nowIso = new Date().toISOString();
-    const { error: unsubErr } = await supabaseServer
+    const { error: confirmErr } = await supabaseServer
       .from("subscribers")
       .update({
-        status: "unsubscribed",
-        unsubscribed_at: nowIso,
+        status: "confirmed",
+        confirmed_at: nowIso,
+        unsubscribed_at: null, // если человек вернулся — считаем подписанным снова
       })
       .eq("email", tokenRow.email);
 
-    if (unsubErr) {
-      return redirectTo(req, "invalid");
-    }
+    if (confirmErr) return redirectTo(req, "invalid");
 
-    return redirectTo(req, "success");
+    return redirectTo(req, "confirmed");
   } catch {
     return redirectTo(req, "invalid");
   }

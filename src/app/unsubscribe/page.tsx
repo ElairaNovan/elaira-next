@@ -1,3 +1,4 @@
+// src/app/unsubscribe/page.tsx
 import Link from "next/link";
 
 export default function UnsubscribePage({
@@ -21,7 +22,7 @@ export default function UnsubscribePage({
       : status === "expired"
       ? {
           title: "Link expired",
-          text: "This unsubscribe link has expired. If you still want to unsubscribe, use the link from a recent email.",
+          text: "This unsubscribe link has expired. Please use a link from a recent email.",
         }
       : {
           title: "Invalid link",
