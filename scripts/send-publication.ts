@@ -4,6 +4,9 @@ import { Resend } from "resend";
 import { publications } from "../src/content/publications";
 import { supabaseServer } from "../src/lib/supabase-server";
 import { buildPublicationEmail } from "../src/lib/email-template";
+import crypto from "crypto";
+
+
 
 /**
  * Ensures an env var is present and returns it as a string.
@@ -14,6 +17,11 @@ function requireEnv(name: string): string {
   if (!v) throw new Error(`Missing ${name}`);
   return v;
 }
+
+function sha256Hex(value: string) {
+  return crypto.createHash("sha256").update(value).digest("hex");
+}
+
 
 const resendApiKey = requireEnv("RESEND_API_KEY");
 const FROM_EMAIL = requireEnv("RESEND_FROM_EMAIL");
@@ -58,9 +66,10 @@ async function run() {
     }
 
     const { data: subscribers, error } = await supabaseServer
-      .from("subscribers")
-      .select("email")
-      .eq("status", "active");
+  .from("subscribers")
+  .select("email")
+  .eq("status", "confirmed");
+
 
     if (error) {
       console.error("Failed to fetch subscribers", error);
@@ -84,9 +93,22 @@ async function run() {
     for (const email of list) {
       try {
         const pubUrl = new URL(pub.url, SITE_URL).toString();
-        const unsubscribeUrl = `${SITE_URL}/unsubscribe?email=${encodeURIComponent(
-          email
-        )}`;
+        const unsubToken = crypto.randomBytes(32).toString("hex");
+const unsubTokenHash = sha256Hex(unsubToken);
+const unsubExpiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toISOString(); // 7 days
+
+const { error: unsubTokenErr } = await supabaseServer.from("email_tokens").insert({
+  email,
+  type: "unsubscribe",
+  token_hash: unsubTokenHash,
+  expires_at: unsubExpiresAt,
+});
+
+if (unsubTokenErr) {
+  throw new Error(`Failed to create unsubscribe token: ${unsubTokenErr.message}`);
+}
+
+const unsubscribeUrl = `${SITE_URL}/api/unsubscribe/confirm?token=${unsubToken}`;
 
         const { subject, html, text } = buildPublicationEmail({
           subject: `New publication — ${pub.title}`,

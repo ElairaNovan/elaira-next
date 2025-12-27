@@ -6,13 +6,17 @@ function sha256Hex(value: string) {
   return crypto.createHash("sha256").update(value).digest("hex");
 }
 
+function redirectTo(req: Request, status: string) {
+  return NextResponse.redirect(new URL(`/unsubscribe?status=${status}`, req.url));
+}
+
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     const token = url.searchParams.get("token");
 
     if (!token) {
-      return NextResponse.json({ ok: false, error: "Missing token" }, { status: 400 });
+      return redirectTo(req, "invalid");
     }
 
     const tokenHash = sha256Hex(token);
@@ -24,20 +28,20 @@ export async function GET(req: Request) {
       .maybeSingle();
 
     if (tokenErr) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
+      return redirectTo(req, "invalid");
     }
 
     if (!tokenRow || tokenRow.type !== "unsubscribe") {
-      return NextResponse.json({ ok: false, error: "Invalid token" }, { status: 400 });
+      return redirectTo(req, "invalid");
     }
 
     if (tokenRow.used_at) {
-      return NextResponse.json({ ok: false, error: "Token already used" }, { status: 400 });
+      return redirectTo(req, "already");
     }
 
     const expiresAt = new Date(tokenRow.expires_at);
     if (Number.isNaN(expiresAt.getTime()) || expiresAt.getTime() < Date.now()) {
-      return NextResponse.json({ ok: false, error: "Token expired" }, { status: 400 });
+      return redirectTo(req, "expired");
     }
 
     // Mark token as used
@@ -47,7 +51,7 @@ export async function GET(req: Request) {
       .eq("id", tokenRow.id);
 
     if (markUsedErr) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
+      return redirectTo(req, "invalid");
     }
 
     // Unsubscribe subscriber (idempotent)
@@ -61,11 +65,11 @@ export async function GET(req: Request) {
       .eq("email", tokenRow.email);
 
     if (unsubErr) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
+      return redirectTo(req, "invalid");
     }
 
-    return NextResponse.json({ ok: true });
+    return redirectTo(req, "success");
   } catch {
-    return NextResponse.json({ ok: false, error: "Server error" }, { status: 500 });
+    return redirectTo(req, "invalid");
   }
 }
