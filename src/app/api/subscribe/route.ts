@@ -53,8 +53,12 @@ export async function POST(req: Request) {
 
 
     if (upsertError) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
-    }
+  return NextResponse.json(
+    { ok: false, error: upsertError.message, details: upsertError.details, hint: upsertError.hint },
+    { status: 500 }
+  );
+}
+
 
     // 2) Create confirmation token (store only hash)
     const token = crypto.randomBytes(32).toString("hex");
@@ -69,8 +73,12 @@ export async function POST(req: Request) {
     });
 
     if (tokenError) {
-      return NextResponse.json({ ok: false, error: "Database error" }, { status: 500 });
-    }
+  return NextResponse.json(
+    { ok: false, error: tokenError.message, details: tokenError.details, hint: tokenError.hint },
+    { status: 500 }
+  );
+}
+
 
     // ✅ 3) Build confirm URL from real request origin (no localhost in prod)
     const origin = process.env.SITE_URL || getOriginFromRequest(req);
