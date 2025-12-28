@@ -7,7 +7,7 @@ export default function Page() {
           {/* LEFT: text */}
           <section className="article-left">
             <a href="/#featured-tiles" className="article-back">
-              ← back to featured essays
+              ← back 
             </a>
 
             <header className="article-header">

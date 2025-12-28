@@ -17,7 +17,7 @@ export default function Page() {
           href="/#research"
           className="inline-flex items-center gap-2 text-[#9fb3d9] hover:text-[#e9f3ff] transition text-sm"
         >
-          ← back to research
+          ← back to home
         </Link>
 
         <div className="mt-10 max-w-[980px]">

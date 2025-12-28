@@ -13,7 +13,17 @@ export default function Page() {
   return (
     <main className="relative">
       <section className="site-frame relative z-10 pt-20 pb-24">
-        <div className="text-[0.72rem] tracking-[0.28em] uppercase text-[#9fb3d9]">
+
+<Link
+  href="/"
+  className="inline-flex items-center gap-2 text-[#9fb3d9] hover:text-[#e9f3ff] transition text-sm"
+>
+  ← back to home
+</Link>
+
+       
+       
+          <div className="mt-10 text-[0.72rem] tracking-[0.28em] uppercase text-[#9fb3d9]">
           SYMBIOSIS
         </div>
 
