@@ -6105,32 +6105,25 @@ article.dream-article hr {
 
 
 
-/* Fix: stop horizontal overflow in Featured Essays tiles */
+/* ============================= */
+/* FIX: Featured Essays overflow */
+/* ============================= */
+
 .tiles-grid {
   width: 100%;
   max-width: 100%;
-}
-
-.tile-card {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;           /* критично для flex/grid детей */
   box-sizing: border-box;
 }
 
-.tile-image-wrap {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;       /* режем все, что вылезает */
-}
-
-img.tile-image {
-  display: block;         /* убирает inline-gap и странные вылеты */
-  width: 100%;
-  max-width: 100%;
-  height: auto;
+/* 🔑 КЛЮЧЕВОЕ */
+@media (max-width: 768px) {
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 
 
-
-
+.tiles-grid > * {
+  min-width: 0;
+}
