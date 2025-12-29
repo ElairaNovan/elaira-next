@@ -1692,6 +1692,10 @@ radial-gradient(
   }
 }
 
+aside {
+  width: auto !important;
+  max-width: 100%;
+}
 
 
 
