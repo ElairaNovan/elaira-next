@@ -6322,6 +6322,32 @@ article.dream-article hr {
 }
 
 
+/* ================= FUTURE CONTACT INTERFACE — TEXT (SAFE) ================= */
+
+.ai-console-vision {
+  margin: 12px 0 22px;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+  color: rgba(205, 230, 255, 0.62);
+  max-width: 56ch;
+  text-shadow:
+    0 1px 16px rgba(50, 170, 255, 0.18),
+    0 1px 1px rgba(0, 0, 0, 0.55);
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 640px) {
+  .ai-console-vision {
+    margin: 10px 0 14px;      /* меньше воздуха, чтобы не "давило" панель */
+    max-width: 34ch;          /* чтобы выглядело аккуратно и не расползалось */
+    line-height: 1.45;
+    letter-spacing: 0.015em;
+  }
+
+  .ai-console-panel {
+    margin-top: 0;            /* убираем возможный лишний сдвиг */
+  }
+}
 
 
 
