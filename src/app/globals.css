@@ -1695,6 +1695,58 @@ radial-gradient(
 
 
 
+/* ──────────────────────────────────────────────
+   FEATURED ESSAYS — FIX root horizontal overflow
+   ────────────────────────────────────────────── */
+@media screen and (max-width: 900px) {
+
+  /* 1) Секция НЕ должна расширять документ */
+  #featured-tiles {
+    overflow-x: clip;          /* ключ: не даём overflow уходить в body/html */
+    overflow-y: visible;
+  }
+
+  /* 2) Только этот контейнер скроллится */
+  #featured-tiles .featured-tiles-inner {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    /* важно для “перехвата” горизонтального жеста внутри, чтобы не толкало страницу */
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 3) Лента — внутри скролл-контейнера, но не влияет на ширину документа */
+  #featured-tiles .tiles-grid {
+    display: inline-flex;      /* вместо flex: меньше шансов “раздуть” layout */
+    flex-wrap: nowrap;
+    gap: 1.6rem;
+
+    width: max-content;        /* оставляем карусель как задумано */
+    max-width: none;
+  }
+
+  /* 4) Карточки: авто-ширина, но ограничена относительно ВНУТРЕННЕЙ области */
+  #featured-tiles .tile-card {
+    flex: 0 0 auto;
+
+    /* ширина карточки = ширина видимой области inner (viewport минус paddings) */
+    width: calc(100vw - 3rem);      /* 2rem слева + 1rem справа = 3rem */
+    max-width: calc(100vw - 3rem);
+    min-width: calc(100vw - 3rem);
+
+    scroll-snap-align: start;
+  }
+
+  /* 5) На всякий случай: запрещаем детям “выталкивать” ширину */
+  #featured-tiles .tiles-grid > * {
+    min-width: 0;
+  }
+}
 
 
 
