@@ -86,13 +86,15 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
        {/* drawer */}
 <aside
   className={[
-    "fixed top-0 right-0 h-dvh w-[86vw] max-w-[360px] overflow-x-hidden",
+    "absolute top-0 right-0 h-full w-[86vw] max-w-[360px]",
     "will-change-transform",
     "transition-[transform,opacity] duration-350 ease-out",
     open
       ? "translate-x-0 opacity-100 scale-100"
       : "translate-x-full opacity-0 scale-[0.985]",
   ].join(" ")}
+
+
 
 
 
