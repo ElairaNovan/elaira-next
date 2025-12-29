@@ -6101,33 +6101,8 @@ article.dream-article hr {
   box-sizing: border-box;
 }
 
-/* Modal: responsive width + safe height */
-.ai-modal{
-  box-sizing: border-box;
-  width: min(560px, calc(100vw - 32px));
-  max-height: min(78vh, 640px);
-  overflow: auto;
 
-  /* neutralize any old centering hacks */
-  left: auto !important;
-  right: auto !important;
-  top: auto !important;
-  bottom: auto !important;
-  margin: 0 !important;
-  transform: none !important;
-}
 
-/* Slightly tighter on small screens */
-@media (max-width: 640px){
-  .ai-modal-overlay{
-    padding: 18px 12px;
-  }
 
-  .ai-modal{
-    width: calc(100vw - 24px);     /* full, but with gutters */
-    max-height: 76vh;
-    border-radius: 18px;           /* если у тебя другое — убери */
-  }
-}
 
-.ai-modal-overlay { transform: none !important; }
+* { outline: 1px solid rgba(255,0,0,.15); }
