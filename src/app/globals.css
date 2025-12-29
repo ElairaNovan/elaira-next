@@ -6133,8 +6133,4 @@ img.tile-image {
 
 
 
-@media (max-width: 640px) {
-  .tiles-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
+
