@@ -1695,34 +1695,6 @@ radial-gradient(
 
 
 
-@media screen and (max-width: 900px) {
-  /* 1) Скролл-контейнер должен быть строго по ширине экрана */
-  #featured-tiles .featured-tiles-inner {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  /* 2) Лента не должна расширять документ */
-  #featured-tiles .tiles-grid {
-    display: flex;
-    flex-wrap: nowrap;
-    width: auto;          /* вместо max-content */
-    max-width: none;
-    min-width: 0;
-  }
-
-  /* 3) Карточкам разрешаем сжиматься внутри контейнера */
-  #featured-tiles .tile-card {
-    flex: 0 0 85vw;
-    width: 85vw;          /* добавляем явно */
-    min-width: 0;         /* ВАЖНО: иначе flex-item может раздувать ленту */
-    max-width: 85vw;
-  }
-}
-
 
 
 
