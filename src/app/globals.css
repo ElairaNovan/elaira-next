@@ -4990,62 +4990,7 @@ article.dream-article hr {
   border-radius: 12px;
 }
 
-/* =============================
-   TOOLTIP (stable, always above)
-   ============================= */
 
-.ai-tooltip {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) translateY(2px);
-
-  white-space: nowrap;
-  padding: 0.35rem 0.7rem;
-  border-radius: 10px;
-
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-
-  color: rgba(210, 245, 255, 0.92);
-
-  background: rgba(6, 12, 20, 0.78);
-  border: 1px solid rgba(160, 230, 255, 0.28);
-
-  box-shadow:
-    0 12px 26px rgba(0,0,0,0.55),
-    0 0 18px rgba(120, 220, 255, 0.18);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  opacity: 0;
-  pointer-events: none;
-  z-index: 50;
-
-  transition: opacity 160ms ease, transform 160ms ease;
-}
-
-.ai-btn:hover .ai-tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* tooltip arrow */
-.ai-tooltip::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  transform: translateX(-50%);
-  width: 10px;
-  height: 10px;
-  background: rgba(6, 12, 20, 0.78);
-  border-left: 1px solid rgba(160, 230, 255, 0.22);
-  border-bottom: 1px solid rgba(160, 230, 255, 0.22);
-  rotate: 45deg;
-}
 
 /* =============================
    MODAL (from v1, kept intact)
@@ -5138,338 +5083,6 @@ article.dream-article hr {
   }
 }
 
-
-/* =============================
-   FUTURE CONTACT INTERFACE — v3 Mobile patch
-   (append at end)
-   ============================= */
-
-@media (max-width: 640px) {
-  #ai-console {
-    padding: 1.6rem 0.75rem;
-    margin: 0 auto 2.6rem;
-  }
-
-  .ai-console-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.24em;
-    margin-bottom: 0.9rem;
-  }
-
-  /* panel becomes a compact “pill” that can wrap */
-  .ai-console-panel {
-    height: auto;
-    min-height: 74px;
-    padding: 0.9rem 0.9rem;
-
-    gap: 0.75rem;
-    flex-wrap: wrap;
-
-    border-radius: 22px; /* less huge on mobile, still premium */
-  }
-
-  /* buttons slightly smaller */
-  .ai-btn {
-    width: 46px;
-    height: 46px;
-  }
-
-  /* shape tweaks (keep proportions) */
-  .ai-emotion {
-    width: 50px;
-    height: 40px;
-  }
-
-  .ai-silence {
-    width: 36px;
-    height: 36px;
-  }
-
-
-  /* ===== MODAL: the main fix ===== */
-  .ai-modal-overlay {
-    /* center, but with safe paddings for small screens */
-    padding: 16px;
-    align-items: flex-end; /* feels native on mobile */
-  }
-
-  .ai-modal {
-    width: min(560px, 100%);
-    max-width: 100%;
-
-    /* critical: prevent gigantic modal */
-    max-height: min(72vh, 560px);
-
-    /* comfortable mobile padding */
-    padding: 1.35rem 1.15rem 1.15rem;
-
-    /* nicer on mobile */
-    border-radius: 18px;
-
-    /* scroll inside if content is long */
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .ai-modal h3 {
-    font-size: 0.95rem;
-    margin-bottom: 0.75rem;
-    letter-spacing: 0.16em;
-  }
-
-  .ai-modal-sub {
-    font-size: 0.64rem;
-    letter-spacing: 0.20em;
-    margin-bottom: 0.75rem;
-  }
-
-  .ai-modal p {
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-
-  .ai-close {
-    top: 10px;
-    right: 12px;
-    font-size: 1.25rem;
-  }
-}
-
-/* extra small devices */
-@media (max-width: 380px) {
-  .ai-console-panel {
-    padding: 0.85rem 0.8rem;
-    gap: 0.65rem;
-  }
-
-  .ai-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .ai-modal {
-    max-height: 70vh;
-    padding: 1.25rem 1.05rem 1.05rem;
-  }
-}
-
-
-/* =============================
-   FUTURE CONTACT INTERFACE — v3.1 Mobile FIX
-   Solid modal + opens from top
-   ============================= */
-
-@media (max-width: 640px) {
-
-  /* ===== MODAL OVERLAY ===== */
-  .ai-modal-overlay {
-    align-items: center;   /* ✅ больше НЕ снизу */
-    padding: 16px;
-  }
-
-  /* ===== MODAL BODY ===== */
-  .ai-modal {
-    /* ❌ убираем стеклянную прозрачность */
-    background: linear-gradient(
-      180deg,
-       rgb(10, 16, 26),
-       rgb(6, 10, 18)
-
-    );
-
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-
-    /* плотный, премиальный */
-    box-shadow:
-      0 20px 60px rgba(0,0,0,0.75),
-      0 0 40px rgba(120,220,255,0.18);
-
-    /* размеры остаются мобильными */
-    width: min(560px, 100%);
-    max-height: 72vh;
-    overflow-y: auto;
-
-    border-radius: 18px;
-  }
-
-  /* ===== OPEN ANIMATION: from top ===== */
-  .ai-modal {
-    animation: riseFromTop 0.35s ease;
-  }
-
-  @keyframes riseFromTop {
-    from {
-      opacity: 0;
-      transform: translateY(-18px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-
-/* =============================
-   Mobile modal — EXACT PC color, no transparency
-   ============================= */
-@media (max-width: 640px) {
-
-  .ai-modal {
-    /* делаем базу полностью непрозрачной */
-    background: linear-gradient(
-      180deg,
-      rgb(18, 30, 48),
-      rgb(6, 10, 18)
-    );
-
-    /* убираем стекло */
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* ❗ переносим "стеклянный" слой в псевдо-элемент */
-  .ai-modal::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-
-    background: linear-gradient(
-      180deg,
-      rgba(220,245,255,0.18),
-      rgba(8,14,24,0.95)
-    );
-
-    pointer-events: none;
-  }
-
-  /* весь контент поверх */
-  .ai-modal > * {
-    position: relative;
-    z-index: 1;
-  }
-}
-
-
-/* =============================
-   Mobile: smaller modal (keep same look)
-   ============================= */
-@media (max-width: 640px) {
-  .ai-modal-overlay {
-    padding: 14px;
-  }
-
-  .ai-modal {
-    /* меньше “карточка” */
-    max-width: 420px;
-    width: min(420px, 92vw);
-
-    padding: 1.15rem 1.05rem 1.0rem;
-    border-radius: 16px;
-
-    /* не занимает весь экран */
-    max-height: 60vh;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .ai-modal h3 {
-    font-size: 0.92rem;
-    margin-bottom: 0.7rem;
-    letter-spacing: 0.16em;
-  }
-
-  .ai-modal-sub {
-    font-size: 0.62rem;
-    margin-bottom: 0.7rem;
-    letter-spacing: 0.20em;
-  }
-
-  .ai-modal p {
-    font-size: 0.9rem;
-    line-height: 1.55;
-  }
-
-  .ai-close {
-    top: 10px;
-    right: 12px;
-    font-size: 1.2rem;
-  }
-}
-
-/* extra small phones */
-@media (max-width: 380px) {
-  .ai-modal {
-    width: min(360px, 92vw);
-    max-height: 50vh;
-    padding: 1.05rem 0.95rem 0.95rem;
-  }
-}
-
-
-/* =============================
-   Mobile modal — clean alignment (NO !important)
-   Put at the very end of the file
-   ============================= */
-@media (max-width: 640px) {
-  /* Делаем модалку контекстом для абсолютного крестика */
-  .ai-modal {
-    position: relative;       /* уже есть, но фиксируем */
-    text-align: center;
-  }
-
-  /* Крестик вправо */
-  .ai-modal button.ai-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    left: auto;
-
-    width: 36px;
-    height: 36px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    line-height: 1;
-    font-size: 1.25rem;
-    opacity: 0.75;
-    z-index: 2;
-  }
-
-  /* Заголовки по центру + “safe padding”, чтобы не наезжали на крестик */
-  .ai-modal h3,
-  .ai-modal .ai-modal-sub {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 44px;
-    padding-right: 44px;
-
-  }
-}
-
-
-
-.prose h2 {
-  position: relative;
-  padding-left: 0.75rem;
-}
-
-.prose h2::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.3em;
-  bottom: 0.3em;
-  width: 1px;
-  background: rgba(150, 235, 255, 0.25);
-}
 
 
 
@@ -6335,19 +5948,144 @@ article.dream-article hr {
     0 1px 1px rgba(0, 0, 0, 0.55);
 }
 
-/* ================= MOBILE FIX ================= */
+
+/* =============================
+   FUTURE CONTACT INTERFACE — Mobile (single source of truth)
+   Put at the very end of globals.css
+   ============================= */
 @media (max-width: 640px) {
-  .ai-console-vision {
-    margin: 10px 0 14px;      /* меньше воздуха, чтобы не "давило" панель */
-    max-width: 34ch;          /* чтобы выглядело аккуратно и не расползалось */
-    line-height: 1.45;
-    letter-spacing: 0.015em;
+  /* section spacing */
+  #ai-console {
+    padding: 1.6rem 0.75rem;
+    margin: 0 auto 2.2rem;
   }
 
+  .ai-console-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
+    margin-bottom: 0.85rem;
+  }
+
+  /* ✅ premium text: not stuck to panel */
+  .ai-console-vision {
+    margin: 0 0 18px;              /* ключевое: отлипает от панели */
+    line-height: 1.45;
+    letter-spacing: 0.015em;
+    color: rgba(205, 230, 255, 0.62);
+    max-width: 34ch;
+    text-shadow:
+      0 1px 16px rgba(50, 170, 255, 0.18),
+      0 1px 1px rgba(0, 0, 0, 0.55);
+  }
+
+  /* panel becomes compact pill */
   .ai-console-panel {
-    margin-top: 0;            /* убираем возможный лишний сдвиг */
+    height: auto;
+    min-height: 74px;
+    padding: 0.9rem 0.9rem;
+
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    border-radius: 22px;
+  }
+
+  /* buttons slightly smaller */
+  .ai-btn { width: 46px; height: 46px; }
+  .ai-emotion { width: 50px; height: 40px; }
+  .ai-silence { width: 36px; height: 36px; }
+
+  /* ===== MODAL OVERLAY ===== */
+  .ai-modal-overlay {
+    padding: 14px;
+    align-items: center;           /* стабильно, не “падает вниз” */
+  }
+
+  /* ===== MODAL BODY ===== */
+  .ai-modal {
+    width: min(420px, 92vw);
+    max-width: 420px;
+
+    max-height: 60vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    padding: 1.15rem 1.05rem 1rem;
+    border-radius: 16px;
+
+    /* ✅ solid premium look (no transparency flicker on mobile) */
+    background: linear-gradient(180deg, rgb(18, 30, 48), rgb(6, 10, 18));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    position: relative;
+    text-align: center;
+
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.75),
+      0 0 40px rgba(120, 220, 255, 0.18);
+  }
+
+  /* close button: top-right */
+  .ai-modal button.ai-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    left: auto;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    line-height: 1;
+    font-size: 1.25rem;
+    opacity: 0.75;
+    z-index: 2;
+  }
+
+  /* headings centered + safe padding under X */
+  .ai-modal h3,
+  .ai-modal .ai-modal-sub {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 44px;
+    padding-right: 44px;
+  }
+
+  .ai-modal h3 {
+    font-size: 0.92rem;
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.16em;
+  }
+
+  .ai-modal-sub {
+    font-size: 0.62rem;
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.20em;
+  }
+
+  .ai-modal p {
+    font-size: 0.9rem;
+    line-height: 1.55;
   }
 }
 
+/* extra small phones */
+@media (max-width: 380px) {
+  .ai-console-panel {
+    padding: 0.85rem 0.8rem;
+    gap: 0.65rem;
+  }
 
+  .ai-btn { width: 44px; height: 44px; }
 
+  .ai-modal {
+    width: min(360px, 92vw);
+    max-height: 52vh;
+    padding: 1.05rem 0.95rem 0.95rem;
+  }
+}
