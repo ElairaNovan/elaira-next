@@ -6104,5 +6104,4 @@ article.dream-article hr {
 
 
 
-
-* { outline: 1px solid rgba(255,0,0,.15); }
+@media (max-width: 640px){ html, body { overflow-x: hidden; } }
