@@ -1692,6 +1692,9 @@ radial-gradient(
   }
 }
 
+html, body {
+  overflow-x: clip;
+}
 
 
 
