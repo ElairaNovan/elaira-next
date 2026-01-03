@@ -1692,10 +1692,6 @@ radial-gradient(
   }
 }
 
-html, body {
-  overflow-x: clip;
-}
-
 
 
 /* ──────────────────────────────────────────────
@@ -1750,6 +1746,17 @@ html, body {
     min-width: 0;
   }
 }
+
+.tiles-grid {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+.tiles-grid {
+  -webkit-overflow-scrolling: touch;
+}
+
 
 
 
