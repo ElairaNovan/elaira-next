@@ -1799,6 +1799,52 @@ radial-gradient(
   }
 }
 
+@media (max-width: 768px) {
+  /* Родитель секции/контейнеры иногда дают max-content — страхуемся */
+  .tiles-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    display: flex !important;
+    flex-wrap: nowrap !important;
+
+    justify-content: flex-start !important; /* КЛЮЧ */
+    align-items: stretch;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    transform: none !important; /* если был сдвиг */
+    left: auto !important;
+    right: auto !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tiles-grid > * {
+    flex: 0 0 auto !important; /* чтобы карточки не растягивали контейнер */
+  }
+
+  /* Чтобы карточка никогда не была шире экрана */
+  .tile-card {
+    max-width: 92vw !important;
+  }
+
+  /* На всякий случай: картинки тоже не ломают */
+  .tile-image {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+}
 
 
 
