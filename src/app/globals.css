@@ -1748,15 +1748,24 @@ radial-gradient(
 }
 
 .tiles-grid {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  max-width: 100%;
-}
 
-.tiles-grid {
+  display: flex;
+  flex-wrap: nowrap;
+
+  padding-inline: 16px;
+  box-sizing: border-box;
+
   -webkit-overflow-scrolling: touch;
 }
-.tiles-grid { overflow-x: auto !important; }
+.tile-card {
+  flex: 0 0 auto;     /* не растягивать контейнер */
+  max-width: 85vw;    /* чтобы карточка не была шире экрана */
+}
 
 
 
