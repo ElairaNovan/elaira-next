@@ -1767,6 +1767,37 @@ radial-gradient(
   max-width: 85vw;    /* чтобы карточка не была шире экрана */
 }
 
+@media (max-width: 768px) {
+  .tiles-grid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-wrap: nowrap;
+
+    justify-content: flex-start; /* ключ */
+    margin-left: 0;
+    transform: none;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding-left: 16px;   /* чтобы не резало первую карточку */
+    padding-right: 16px;
+    box-sizing: border-box;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tiles-grid > * {
+    flex: 0 0 auto;
+  }
+
+  .tile-card {
+    max-width: 92vw; /* защита от слишком широкой карточки */
+  }
+}
 
 
 
