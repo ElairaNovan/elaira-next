@@ -1756,6 +1756,7 @@ radial-gradient(
 .tiles-grid {
   -webkit-overflow-scrolling: touch;
 }
+.tiles-grid { overflow-x: auto !important; }
 
 
 
