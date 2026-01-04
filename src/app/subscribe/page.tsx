@@ -178,6 +178,9 @@ export default function SubscribePage() {
                   If you don’t see it, check Spam/Promotions.
                 </p>
 
+                <p className="text-xs text-white/30">build: subscribe-v3</p>
+
+
                 <button
                   type="button"
                   className="
