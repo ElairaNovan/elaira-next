@@ -1,18 +1,15 @@
 // scripts/send-publication.ts
-// scripts/send-publication.ts
-import "dotenv/config";
+import dotenv from "dotenv";
+import path from "path";
+
+// 1) Гарантированно грузим .env.local ДО любых импортов, которые читают process.env
+dotenv.config({ path: path.resolve(process.cwd(), ".env.local") });
 
 console.log("SUPABASE_URL:", process.env.SUPABASE_URL ? "OK" : "MISSING");
-console.log("SERVICE_ROLE:", process.env.SUPABASE_SERVICE_ROLE_KEY ? "OK" : "MISSING");
-
-
-import { Resend } from "resend";
-import { publications } from "../src/content/publications";
-import { supabaseServer } from "../src/lib/supabase-server";
-import { buildPublicationEmail } from "../src/lib/email-template";
-import crypto from "crypto";
-
-
+console.log(
+  "SERVICE_ROLE:",
+  process.env.SUPABASE_SERVICE_ROLE_KEY ? "OK" : "MISSING"
+);
 
 /**
  * Ensures an env var is present and returns it as a string.
@@ -24,24 +21,30 @@ function requireEnv(name: string): string {
   return v;
 }
 
-function sha256Hex(value: string) {
-  return crypto.createHash("sha256").update(value).digest("hex");
-}
-
-
-const resendApiKey = requireEnv("RESEND_API_KEY");
-const FROM_EMAIL = requireEnv("RESEND_FROM_EMAIL");
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  process.env.SITE_URL ||
-  "http://localhost:3000";
-
-const DRY_RUN = process.env.DRY_RUN === "true";
-
-const resend = new Resend(resendApiKey);
-
 async function run() {
+  // 2) Импорты делаем ПОСЛЕ загрузки env
+  const { Resend } = await import("resend");
+  const { publications } = await import("../src/content/publications");
+  const { supabaseServer } = await import("../src/lib/supabase-server");
+  const { buildPublicationEmail } = await import("../src/lib/email-template");
+  const crypto = (await import("crypto")).default;
+
+  function sha256Hex(value: string) {
+    return crypto.createHash("sha256").update(value).digest("hex");
+  }
+
+  const resendApiKey = requireEnv("RESEND_API_KEY");
+  const FROM_EMAIL = requireEnv("RESEND_FROM_EMAIL");
+
+  const SITE_URL =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.SITE_URL ||
+    "http://localhost:3000";
+
+  const DRY_RUN = process.env.DRY_RUN === "true";
+
+  const resend = new Resend(resendApiKey);
+
   console.log(`SITE_URL: ${SITE_URL}`);
   console.log(`DRY_RUN: ${DRY_RUN ? "true" : "false"}`);
 
@@ -72,10 +75,9 @@ async function run() {
     }
 
     const { data: subscribers, error } = await supabaseServer
-  .from("subscribers")
-  .select("email")
-  .eq("status", "confirmed");
-
+      .from("subscribers")
+      .select("email")
+      .eq("status", "confirmed");
 
     if (error) {
       console.error("Failed to fetch subscribers", error);
@@ -83,8 +85,8 @@ async function run() {
     }
 
     const list = (subscribers ?? [])
-      .map((s) => s.email)
-      .filter((e): e is string => typeof e === "string" && e.length > 0);
+      .map((s: any) => s.email)
+      .filter((e: any): e is string => typeof e === "string" && e.length > 0);
 
     console.log(`Subscribers: ${list.length}`);
 
@@ -99,22 +101,29 @@ async function run() {
     for (const email of list) {
       try {
         const pubUrl = new URL(pub.url, SITE_URL).toString();
+
         const unsubToken = crypto.randomBytes(32).toString("hex");
-const unsubTokenHash = sha256Hex(unsubToken);
-const unsubExpiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toISOString(); // 7 days
+        const unsubTokenHash = sha256Hex(unsubToken);
+        const unsubExpiresAt = new Date(
+          Date.now() + 1000 * 60 * 60 * 24 * 7
+        ).toISOString(); // 7 days
 
-const { error: unsubTokenErr } = await supabaseServer.from("email_tokens").insert({
-  email,
-  type: "unsubscribe",
-  token_hash: unsubTokenHash,
-  expires_at: unsubExpiresAt,
-});
+        const { error: unsubTokenErr } = await supabaseServer
+          .from("email_tokens")
+          .insert({
+            email,
+            type: "unsubscribe",
+            token_hash: unsubTokenHash,
+            expires_at: unsubExpiresAt,
+          });
 
-if (unsubTokenErr) {
-  throw new Error(`Failed to create unsubscribe token: ${unsubTokenErr.message}`);
-}
+        if (unsubTokenErr) {
+          throw new Error(
+            `Failed to create unsubscribe token: ${unsubTokenErr.message}`
+          );
+        }
 
-const unsubscribeUrl = `${SITE_URL}/api/unsubscribe/confirm?token=${unsubToken}`;
+        const unsubscribeUrl = `${SITE_URL}/api/unsubscribe/confirm?token=${unsubToken}`;
 
         const { subject, html, text } = buildPublicationEmail({
           subject: `New publication — ${pub.title}`,
@@ -124,7 +133,7 @@ const unsubscribeUrl = `${SITE_URL}/api/unsubscribe/confirm?token=${unsubToken}`
           unsubscribeUrl,
         });
 
-        // Preview (важно)
+        // Preview
         console.log("\n--- Email preview ---");
         console.log(`to: ${email}`);
         console.log(`subject: ${subject}`);
