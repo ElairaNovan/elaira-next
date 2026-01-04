@@ -1793,70 +1793,64 @@ radial-gradient(
   }
 }
 
-/* ===== Featured Essays: Mobile (лента со скроллом) ===== */
-@media (max-width: 900px) {
+/* ===== Featured Essays: Desktop (4 карточки, КРУПНЕЕ, как раньше) ===== */
+@media (min-width: 901px) {
   .tiles-scroll {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding-inline: 16px !important;
-    box-sizing: border-box !important;
-    -webkit-overflow-scrolling: touch !important;
+    overflow: visible !important;
+    padding: 0 !important;
   }
 
   .tiles-grid {
-    display: flex !important;
-    flex-wrap: nowrap !important;
+    display: grid !important;
+
+    /* Ключ: фиксируем “крупную” ширину карточек */
+    grid-template-columns: repeat(4, minmax(360px, 1fr)) !important;
+
     gap: 16px !important;
-    width: max-content !important;
+
+    /* Центрируем сетку и не даём ей растягиваться на всю ширину */
+    max-width: 1240px !important;   /* можно 1280, если хочешь шире */
+    margin-inline: auto !important;
+
+    width: 100% !important;
+    overflow: visible !important;
   }
 
   .tile-card {
-    flex: 0 0 auto !important;
-    width: 85vw !important;
-    max-width: 360px !important;
+    min-width: 0 !important;
   }
 }
 
 
+/* MOBILE ONLY: убрать глобальный horizontal scroll */
+@media (max-width: 900px) {
+  /* страховка от “вылезаний” */
+  html, body {
+    overflow-x: clip;
+  }
 
-/* =========================================================
-   COSMIC NEURAL CONSTELLATION PANEL
-   ========================================================= */
+  /* Featured Essays: на мобиле НЕ 4 колонки */
+  .tiles-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;  /* одна колонка */
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
 
-.cosmic-map-section {
-  padding: 3rem 0 3.5rem;
-  background: radial-gradient(
-      1100px 900px at 10% 0%,
-      rgba(80, 170, 255, 0.14),
-      transparent 70%
-    ),
-    radial-gradient(
-      900px 700px at 90% 100%,
-      rgba(0, 220, 200, 0.12),
-      transparent 70%
-    );
+  .tile-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* на всякий случай: медиа не раздувают */
+  .tile-image, .tile-image-wrap, img {
+    max-width: 100% !important;
+  }
 }
 
 
-.cosmic-map-section {
-   padding-top: 0rem;
-}
-
-.cosmic-map-inner {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 2.4rem;
-}
-
-.cosmic-map-header {
-  max-width: 780px;
-  margin: 0 auto 2.3rem;
-  text-align: center;
-margin-top: 0;
-padding-top: 0;
-
-}
 
 
 
