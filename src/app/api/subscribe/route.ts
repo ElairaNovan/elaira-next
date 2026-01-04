@@ -18,16 +18,21 @@ function sha256Hex(value: string) {
 }
 
 function getOriginFromRequest(req: Request) {
-  // Vercel прокидывает x-forwarded-*
   const proto = req.headers.get("x-forwarded-proto") ?? "https";
   const host =
     req.headers.get("x-forwarded-host") ??
     req.headers.get("host");
 
-  if (host) return `${proto}://${host}`;
+  const inferred = host ? `${proto}://${host}` : null;
 
-  // крайний fallback (на случай очень странной среды)
-  return process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  return (
+    process.env.SITE_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    inferred ||
+    (process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://www.elairanovan.com")
+  );
 }
 
 export async function POST(req: Request) {
