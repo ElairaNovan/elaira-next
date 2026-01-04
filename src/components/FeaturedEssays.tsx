@@ -42,39 +42,38 @@ const featuredArticles = [
 
 export default function FeaturedEssays() {
   return (
-  <section id="featured-tiles" className="featured-tiles-section">
-    <div className="featured-tiles-inner">
-      <p className="featured-tiles-label">FEATURED ESSAYS</p>
+    <section id="featured-tiles" className="featured-tiles-section">
+      <div className="featured-tiles-inner">
+        <p className="featured-tiles-label">FEATURED ESSAYS</p>
 
-      <div className="tiles-grid">
-        {featuredArticles.map((item) => (
-          <Link key={item.id} href={item.href} className="tile-card">
-            <div className="tile-image-wrap">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={1200}
-                height={800}
-                className="tile-image"
-              />
-            </div>
+        <div className="tiles-scroll">
+          <div className="tiles-grid">
+            {featuredArticles.map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className="tile-card"
+              >
+                <div className="tile-image-wrap">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={1200}
+                    height={800}
+                    className="tile-image"
+                  />
+                </div>
 
-            <div className="tile-content">
-              <p className="tile-tag">{item.tag}</p>
-              <h3 className="tile-title">{item.title}</h3>
-              <p className="tile-summary">{item.summary}</p>
-            </div>
-          </Link>
-        ))}
+                <div className="tile-content">
+                  <p className="tile-tag">{item.tag}</p>
+                  <h3 className="tile-title">{item.title}</h3>
+                  <p className="tile-summary">{item.summary}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 }
-
-
-
-
-
-
-
