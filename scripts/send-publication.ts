@@ -1,6 +1,10 @@
 // scripts/send-publication.ts
-import dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
+// scripts/send-publication.ts
+import "dotenv/config";
+
+console.log("SUPABASE_URL:", process.env.SUPABASE_URL ? "OK" : "MISSING");
+console.log("SERVICE_ROLE:", process.env.SUPABASE_SERVICE_ROLE_KEY ? "OK" : "MISSING");
+
 
 import { Resend } from "resend";
 import { publications } from "../src/content/publications";
