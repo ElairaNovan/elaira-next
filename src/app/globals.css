@@ -1767,6 +1767,57 @@ radial-gradient(
   max-width: 85vw;    /* чтобы карточка не была шире экрана */
 }
 
+/* ===== Featured Essays: Desktop (вернуть как было) ===== */
+@media (min-width: 901px) {
+  .tiles-scroll {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  .tiles-grid {
+    width: auto !important;
+    max-width: none !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important; /* если раньше было 3 — замени на 3 */
+    gap: 16px !important;
+
+    overflow: visible !important;
+  }
+
+  .tile-card {
+    width: auto !important;
+    max-width: none !important;
+    flex: initial !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ===== Featured Essays: Mobile (лента со скроллом) ===== */
+@media (max-width: 900px) {
+  .tiles-scroll {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding-inline: 16px !important;
+    box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .tiles-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 16px !important;
+    width: max-content !important;
+  }
+
+  .tile-card {
+    flex: 0 0 auto !important;
+    width: 85vw !important;
+    max-width: 360px !important;
+  }
+}
 
 
 
