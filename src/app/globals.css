@@ -1822,34 +1822,6 @@ radial-gradient(
 }
 
 
-/* MOBILE ONLY: убрать глобальный horizontal scroll */
-@media (max-width: 900px) {
-  /* страховка от “вылезаний” */
-  html, body {
-    overflow-x: clip;
-  }
-
-  /* Featured Essays: на мобиле НЕ 4 колонки */
-  .tiles-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;  /* одна колонка */
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  .tile-card {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  /* на всякий случай: медиа не раздувают */
-  .tile-image, .tile-image-wrap, img {
-    max-width: 100% !important;
-  }
-}
-
 
 
 
@@ -6221,3 +6193,8 @@ article.dream-article hr {
 }
 
 
+img, svg, canvas, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
