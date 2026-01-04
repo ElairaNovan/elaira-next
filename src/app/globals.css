@@ -6193,48 +6193,13 @@ article.dream-article hr {
 }
 
 
-/* ✅ Mobile: stop Featured essays row from widening the page */
-@media (max-width: 900px) {
-  .tiles-grid {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
 
-    /* ВАЖНО: убрать "max-content/inline-flex" поведение */
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-
-    /* делаем скролл внутри ряда */
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-
-    /* чтобы первая карточка не резалась */
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-    box-sizing: border-box !important;
-
-    /* убираем возможные сдвиги */
-    transform: none !important;
-    margin: 0 !important;
-  }
-
-  .tile-card {
-    flex: 0 0 auto !important;
-
-    /* 🔥 ключ: карточка не может быть шире экрана */
-    width: min(360px, 92vw) !important;
-    max-width: 92vw !important;
-  }
-
-  .tile-image-wrap,
-  .tile-content {
-    max-width: 100% !important;
-  }
-
-  img.tile-image {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block !important;
+@supports not (overflow: clip) {
+  html, body {
+    overflow-x: hidden;
   }
 }
