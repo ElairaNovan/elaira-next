@@ -6243,3 +6243,58 @@ article.dream-article hr {
     width: min(360px, 92vw) !important;
   }
 }
+
+/* --- Featured Essays: make 4-up cards larger on desktop by widening the container --- */
+@media (min-width: 1024px) {
+  /* 1) расширяем общий контейнер секции (обычно именно он сжимает карточки) */
+  .featured-tiles-section .site-frame {
+    max-width: 1480px;     /* попробуй 1480; можно 1560 если хочешь ещё крупнее */
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  /* 2) фиксируем 4 колонки */
+  .tiles-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+    overflow: visible !important;
+  }
+
+  /* 3) защита от “сжатия” контента внутри карточки */
+  .tile-card {
+    min-width: 0 !important;
+  }
+}
+@media (min-width: 1024px) {
+  .featured-tiles-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .featured-tiles-section .site-frame {
+    max-width: 1560px;
+  }
+}
+
+/* === Featured Essays: wider container only for this section (desktop) === */
+@media (min-width: 1024px) {
+  section#featured-tiles > .site-frame {
+    max-width: 1560px;   /* ← ключевая строка */
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #featured-tiles {
+    max-width: 1560px !important;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
