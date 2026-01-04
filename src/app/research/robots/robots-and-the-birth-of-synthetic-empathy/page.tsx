@@ -18,11 +18,11 @@ export default function Page() {
           </div>
 
           <h1 className="mt-4 text-[2rem] md:text-[2.6rem] lg:text-[3rem] font-light text-[#e9f3ff] leading-tight">
-            Robots and the Birth of Synthetic Empathy
+            Empathy as Interface
           </h1>
 
           <p className="mt-3 text-[#b7c6e6]">The Birth of Synthetic Empathy</p>
-          <p className="mt-2 text-[#b7c6e6]/80">Temporary entry</p>
+          
         </div>
 
         <article className="dream-article mt-10 mx-auto max-w-[720px]">

@@ -43,7 +43,7 @@ export default function Page() {
             </h2>
 
             <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
-              Open the entry page. The full essay and visuals will be added next — without changing the URL.
+              Empathy as Interface
             </p>
           </div>
         </Link>
