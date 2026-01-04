@@ -6200,3 +6200,46 @@ article.dream-article hr {
   width: auto !important;
   max-width: 100% !important;
 }
+
+
+/* Force Featured Essays to be GRID on desktop/tablet */
+@media (min-width: 801px) {
+  .tiles-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+
+    overflow: visible !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .tile-card {
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+/* Mobile rail */
+@media (max-width: 800px) {
+  .tiles-grid {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .tile-card {
+    flex: 0 0 auto !important;
+    width: min(360px, 92vw) !important;
+  }
+}
