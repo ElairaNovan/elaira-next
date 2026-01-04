@@ -6195,47 +6195,32 @@ article.dream-article hr {
 
 /* Prevent ai-drift from widening the page */
 .ai-drift {
+  position: absolute;
   left: 0 !important;
   right: 0 !important;
   width: auto !important;
   max-width: 100% !important;
+  pointer-events: none;
 }
 
 
-/* Force Featured Essays to be GRID on desktop/tablet */
-@media (min-width: 801px) {
-  .tiles-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 24px !important;
 
-    overflow: visible !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+/* ================================
+   Featured Essays: mobile rail + desktop grid
+   ================================ */
 
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  .tile-card {
-    width: auto !important;
-    max-width: none !important;
-  }
-}
 /* Mobile rail */
 @media (max-width: 800px) {
   .tiles-grid {
     display: flex !important;
     flex-wrap: nowrap !important;
     justify-content: flex-start !important;
-
     overflow-x: auto !important;
     overflow-y: hidden !important;
-
     padding-left: 16px !important;
     padding-right: 16px !important;
     box-sizing: border-box !important;
+    -webkit-overflow-scrolling: touch;
   }
 
   .tile-card {
@@ -6244,54 +6229,30 @@ article.dream-article hr {
   }
 }
 
-/* --- Featured Essays: make 4-up cards larger on desktop by widening the container --- */
-@media (min-width: 1024px) {
-  /* 1) расширяем общий контейнер секции (обычно именно он сжимает карточки) */
-  .featured-tiles-section .site-frame {
-    max-width: 1480px;     /* попробуй 1480; можно 1560 если хочешь ещё крупнее */
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-  /* 2) фиксируем 4 колонки */
+/* Desktop/tablet grid */
+@media (min-width: 801px) {
   .tiles-grid {
     display: grid !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 24px !important;
+    gap: 28px !important;
     overflow: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
-  /* 3) защита от “сжатия” контента внутри карточки */
   .tile-card {
     min-width: 0 !important;
-  }
-}
-@media (min-width: 1024px) {
-  .featured-tiles-section {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .featured-tiles-section .site-frame {
-    max-width: 1560px;
+    width: auto !important;
+    max-width: none !important;
   }
 }
 
-/* === Featured Essays: wider container only for this section (desktop) === */
+/* Make cards larger on desktop by widening ONLY this section */
 @media (min-width: 1024px) {
-  section#featured-tiles > .site-frame {
-    max-width: 1560px;   /* ← ключевая строка */
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-  .tiles-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 28px;
-  }
-}
-
-@media (min-width: 1024px) {
+  /* главное: расширяем сам #featured-tiles (у тебя он реально ограничивал ширину) */
   #featured-tiles {
     max-width: 1560px !important;
     padding-left: 32px;
