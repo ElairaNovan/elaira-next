@@ -60,11 +60,11 @@ export default function Page() {
     </p>
 
     <h2 className="text-lg md:text-xl font-light tracking-wide text-[#e9f3ff]">
-      Trust Without a Subject
+       The Birth of Synthetic Empathy
     </h2>
 
     <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
-      Robots and the Birth of Synthetic Empathy / Trust Without a Subject
+      Trust Without a Subject
     </p>
   </div>
 </Link>
