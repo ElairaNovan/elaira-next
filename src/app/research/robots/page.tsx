@@ -47,6 +47,29 @@ export default function Page() {
             </p>
           </div>
         </Link>
+
+{/* CARD -> entry page */}
+<Link
+  href="/research/robots/trust-without-a-subject"
+  className="card mt-6 max-w-3xl block"
+  style={{ textDecoration: "none" }}
+>
+  <div className="p-6 md:p-7">
+    <p className="text-[0.7rem] tracking-[0.28em] uppercase text-[#9fb3d9] mb-3">
+      Cycle entry
+    </p>
+
+    <h2 className="text-lg md:text-xl font-light tracking-wide text-[#e9f3ff]">
+      Trust Without a Subject
+    </h2>
+
+    <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
+      Robots and the Birth of Synthetic Empathy / Trust Without a Subject
+    </p>
+  </div>
+</Link>
+
+
       </section>
     </main>
   );
