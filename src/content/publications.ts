@@ -36,6 +36,18 @@ export const publications: Publication[] = [
     notify: false,
   },
 
+
+{
+  id: "trust-without-a-subject",
+  section: "Research",
+  title: "Trust Without a Subject",
+  url: "/research/robots/trust-without-a-subject",
+  excerpt: "Trust Without a Subject",
+  publishedAt: "2026-01-04",
+  notify: true,
+},
+
+
   // ✅ НОВАЯ ПУБЛИКАЦИЯ ДЛЯ ТЕСТА ПОДПИСКИ
   {
     id: "synthetic-empathy-interface",
