@@ -47,6 +47,21 @@ export const publications: Publication[] = [
   notify: true,
 },
 
+{
+  id: "dialogue-003-geometry-of-choice",
+  section: "Dialogues",
+  title: "Does AI influence the geometry of choice?",
+  url: "/dialogues/response-3",
+  excerpt: "New dialogue is now live.",
+  publishedAt: "2026-01-05",
+  notify: true,
+
+  // важно: уникальная тема письма, чтобы НЕ склеилось
+  emailSubject: "New dialogue — Does AI influence the geometry of choice? (Jan 5)",
+  emailIntro: "A new dialogue is now live on Elaira Novan.",
+},
+
+
 
   // ✅ НОВАЯ ПУБЛИКАЦИЯ ДЛЯ ТЕСТА ПОДПИСКИ
   {
