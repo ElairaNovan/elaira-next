@@ -439,7 +439,8 @@ export function ExperimentPedestal() {
   <img
     src="/assets/444.png"
     alt="Diagram — Human, Decision, AI, Structure"
-  className="w-full h-[480px] object-cover object-center"
+ 
+   className="w-full h-auto object-contain md:h-[480px] md:object-cover object-center"
     loading="lazy"
   />
 
