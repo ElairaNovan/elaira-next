@@ -211,12 +211,17 @@ export function ExperimentPedestal() {
  {/* Hard schema #3 — Constraints → Threshold → System */}
 <div className="mt-8 relative overflow-hidden rounded-2xl">
   <img
-  src="/assets/653.png"
-  alt="Condition of the experiment — constraints and system entry"
-  className="w-full h-auto object-contain"
-/>
-
+    src="/assets/653.png"
+    alt="Condition of the experiment — constraints and system entry"
+    className="
+      w-full
+      h-auto object-contain
+      md:h-[480px] md:object-cover md:object-center
+    "
+    loading="lazy"
+  />
 </div>
+
 
 
 
