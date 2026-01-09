@@ -97,10 +97,7 @@ export default function Header() {
               </button>
 
               {/* DESKTOP: nav chips */}
-              <nav
-                aria-label="Primary"
-                className="hidden md:flex items-start gap-5"
-              >
+              <nav aria-label="Primary" className="hidden md:flex items-start gap-5">
                 <div
                   ref={aboutWrapRef}
                   className="relative pb-3"
@@ -109,9 +106,7 @@ export default function Header() {
                 >
                   <button
                     type="button"
-                    className={`nav-chip nav-chip--meta ${
-                      aboutOpen ? "is-active" : ""
-                    }`}
+                    className={`nav-chip nav-chip--meta ${aboutOpen ? "is-active" : ""}`}
                     aria-haspopup="menu"
                     aria-expanded={aboutOpen}
                     onClick={() => {
@@ -165,8 +160,19 @@ export default function Header() {
                   )}
                 </div>
 
+                {/* Dialogues (restored) */}
                 <Link href="/dialogues" className="nav-chip nav-chip--meta">
                   <span className="nav-chip__label">Dialogues</span>
+                </Link>
+
+                {/* Technologies with AI (new) */}
+                <Link
+                  href="/technologies"
+                  className="nav-chip nav-chip--meta group hover:shadow-[0_0_22px_rgba(122,76,255,0.20)] hover:ring-1 hover:ring-[#7a4cff]/20"
+                >
+                  <span className="nav-chip__label text-[#b79cff] group-hover:text-[#d7c8ff]">
+                    Technologies with AI
+                  </span>
                 </Link>
               </nav>
             </div>
