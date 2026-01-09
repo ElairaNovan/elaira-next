@@ -135,6 +135,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                   { href: "/about", label: "About" },
                   { href: "/charter", label: "Public Charter" },
                   { href: "/dialogues", label: "Dialogues" },
+                   { href: "/technologies", label: "Technologies with AI" },
                 ].map((item) => (
                   <li key={item.href}>
                     <Link
