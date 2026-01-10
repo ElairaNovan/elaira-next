@@ -54,7 +54,7 @@ export default function TechnologiesPage() {
  
            <Link
           href="/"
-          className="inline-flex items-center gap-3 text-[#9fb3d9] hover:text-[#e9f3ff] transition text-sm"
+           className="inline-flex items-center gap-3 text-[#9fb3d9] hover:text-[#e9f3ff] transition text-sm mb-3"
         >
           ← back
         </Link>
@@ -195,6 +195,37 @@ export default function TechnologiesPage() {
   </div>
 </div>
 
+
+{/* Navigation: Joint Action Protocols */}
+<Link
+  href="/technologies/protocols"
+  className="
+    group mt-10 block
+    max-w-5xl
+    rounded-[28px]
+    bg-[#101B28]
+    px-10 py-7
+    transition
+    hover:bg-[#122033]
+  "
+>
+  <div className="flex items-center justify-between gap-8">
+    <div>
+      <p className="text-[0.65rem] tracking-[0.34em] uppercase text-white/45">
+        Core Method
+      </p>
+      <p className="mt-2 text-[1.05rem] tracking-[0.06em] text-white/85">
+        Joint Action Protocols
+      </p>
+    </div>
+
+    <span className="text-white/55 group-hover:text-white/80 transition">
+      →
+    </span>
+  </div>
+</Link>
+
+
 {/* Project index (archival marker) */}
 <p className="mt-12 md:mt-14 uppercase text-white/55">
   <span className="text-[0.82rem] md:text-[0.86rem] tracking-[0.26em]">
@@ -214,9 +245,9 @@ export default function TechnologiesPage() {
     "mt-12 md:mt-16 block",
     "rounded-3xl",
     "border border-white/8",
-    "bg-white/[0.01]",
+    "bg-[#0B1220]",                // ← холодный структурный фон карточки
     "backdrop-blur-[2px]",
-    "shadow-[0_0_36px_rgba(255,120,200,0.04)]",
+    "shadow-[0_0_36px_rgba(120,180,255,0.04)]",
     "transition-colors duration-300",
     "hover:border-white/12",
     "focus:outline-none focus-visible:ring-1 focus-visible:ring-white/25",
@@ -231,8 +262,8 @@ export default function TechnologiesPage() {
           className={[
             "relative overflow-hidden rounded-2xl",
             "border border-white/10",
-            "bg-white/[0.02] backdrop-blur-sm",
-            "shadow-[0_0_30px_rgba(110,80,255,0.10)]",
+            "bg-[#0E1729] backdrop-blur-sm", // ← чуть активнее, глубже
+            "shadow-[0_0_30px_rgba(90,150,255,0.10)]",
           ].join(" ")}
         >
           <Image
@@ -249,13 +280,13 @@ export default function TechnologiesPage() {
         </div>
       </div>
 
-      {/* RIGHT: Passport (still visually the same, but now part of the clickable object) */}
+      {/* RIGHT: Passport */}
       <div className="md:col-span-5">
         <div
           className={[
             "rounded-2xl",
             "border border-white/10",
-            "bg-white/[0.01]",
+            "bg-[#0C1424]",              // ← тот же холодный цвет, но спокойнее
             "backdrop-blur-[2px]",
           ].join(" ")}
         >
@@ -311,7 +342,7 @@ export default function TechnologiesPage() {
       </div>
     </div>
 
-    {/* Bottom status line inside the frame */}
+    {/* Bottom status line */}
     <div className="mt-5 md:mt-6 border-t border-white/10 pt-4">
       <p className="text-[0.78rem] md:text-[0.82rem] tracking-[0.26em] uppercase text-white/55">
         Open project
@@ -319,6 +350,130 @@ export default function TechnologiesPage() {
     </div>
   </div>
 </Link>
+
+
+{/* Project index (archival marker) */}
+<p className="mt-12 md:mt-14 uppercase text-white/55">
+  <span className="text-[0.82rem] md:text-[0.86rem] tracking-[0.26em]">
+    Project
+  </span>
+  <span className="ml-3 text-[1.05rem] md:text-[1.12rem] tracking-[0.02em]">
+    02
+  </span>
+</p>
+
+{/* PROJECT ENTRY (single clickable object: visual + passport) */}
+<Link
+  href="/technologies/projects/coffee"
+  aria-label="Open project: Coffee × AI"
+  className={[
+    "mt-12 md:mt-16 block",
+    "rounded-3xl",
+    "border border-white/8",
+    "bg-white/[0.01]",
+    "backdrop-blur-[2px]",
+    "shadow-[0_0_36px_rgba(255,120,200,0.04)]",
+    "transition-colors duration-300",
+    "hover:border-white/12",
+    "focus:outline-none focus-visible:ring-1 focus-visible:ring-white/25",
+  ].join(" ")}
+>
+  <div className="p-6 md:p-7">
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-start">
+      {/* LEFT: Visual */}
+      <div className="md:col-span-7">
+        <div
+          className={[
+            "relative overflow-hidden rounded-2xl",
+            "border border-white/10",
+            "bg-white/[0.02] backdrop-blur-sm",
+            "shadow-[0_0_30px_rgba(110,80,255,0.10)]",
+          ].join(" ")}
+        >
+          <Image
+            src="/assets/383.png"
+            alt="Project visual object"
+            width={1600}
+            height={1200}
+            priority={false}
+            className="w-full h-auto select-none"
+          />
+        </div>
+      </div>
+
+      {/* RIGHT: Passport */}
+      <div className="md:col-span-5">
+        <div
+          className={[
+            "rounded-2xl",
+            "border border-white/10",
+            "bg-white/[0.01]",
+            "backdrop-blur-[2px]",
+          ].join(" ")}
+        >
+          {/* top line */}
+          <div className="px-6 py-3">
+            <p className="text-[0.72rem] tracking-[0.38em] uppercase text-white/55">
+              Passport
+            </p>
+            <p className="mt-2 text-[0.95rem] md:text-[1.12rem] leading-[1.7] text-white/75">
+              Coffee × AI
+            </p>
+          </div>
+
+          {/* rows */}
+          <div className="border-t border-white/10">
+            {[
+              ["Type", "Co-created taste experiment"],
+              ["Status", "Active"],
+              ["Year", "2025—"],
+              ["Human role", "Author · Taste direction · Decision authority"],
+              ["AI role", "Analytical intelligence · Recipe synthesis · Structural support"],
+              ["Tools", "AI models · Human-guided prompting"],
+              ["Output", "Recipes · Taste map · Method notes"],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="grid grid-cols-12 gap-3 px-6 py-2 border-t border-white/10 first:border-t-0"
+              >
+                <div className="col-span-4">
+                  <p className="text-[0.72rem] tracking-[0.28em] uppercase text-white/45">
+                    {label}
+                  </p>
+                </div>
+                <div className="col-span-8">
+                  <p className="text-[0.94rem] leading-[1.65] text-white/65">
+                    {value}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* attribution */}
+          <div className="border-t border-white/10 px-6 py-5">
+            <p className="text-[0.7rem] tracking-[0.34em] uppercase text-white/45">
+              Co-created line
+            </p>
+            <p className="mt-1 text-[0.95rem] leading-[1.85] text-white/75">
+              Co-created by Elaira Novan &amp; Artificial Intelligence
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom status line */}
+    <div className="mt-5 md:mt-6 border-t border-white/10 pt-4">
+      <p className="text-[0.78rem] md:text-[0.82rem] tracking-[0.26em] uppercase text-white/55">
+        Open project
+      </p>
+    </div>
+  </div>
+</Link>
+
+
+
 </div>
       </section>
     </main>
