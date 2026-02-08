@@ -11,6 +11,18 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
+  async redirects() {
+    return [
+      // https://elairanovan.com/*  ->  https://www.elairanovan.com/*
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "elairanovan.com" }],
+        destination: "https://www.elairanovan.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
