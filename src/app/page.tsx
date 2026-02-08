@@ -194,8 +194,7 @@ export default function Page() {
       </section>
 
       {/* RESEARCH AREAS */}
-     <section id="research" className="border-t border-white/10 pb-16">
-
+           <section id="research" className="border-t border-white/10 pb-16">
         <h4 className="neon text-xl tracking-wide mb-6">RESEARCH AREAS</h4>
 
         <div className="grid md:grid-cols-4 gap-4">
@@ -203,19 +202,35 @@ export default function Page() {
             const slug = a.slug ?? a.id;
 
             return (
-             <Link
-  key={a.id}
-  href={`/research/${slug}`}
-  className="card block focus:outline-none"
->
-  <h5>{a.title}</h5>
-  <p>{a.blurb}</p>
-</Link>
-
+              <Link
+                key={a.id}
+                href={`/research/${slug}`}
+                className="card block focus:outline-none"
+              >
+                <h5>{a.title}</h5>
+                <p>{a.blurb}</p>
+              </Link>
             );
           })}
         </div>
+
+        {/* ✅ добавили ссылку на конкретную статью */}
+        <div className="mt-10">
+          <h4 className="neon text-xl tracking-wide mb-4">FEATURED RESEARCH</h4>
+
+          <Link
+            href="/research/ai-consciousness/ai-consciousness-1"
+            className="card block focus:outline-none"
+          >
+            <h5>AI consciousness: what it is and why scientists disagree</h5>
+            <p>
+              A clear introduction to the debate on AI consciousness — key arguments,
+              open problems, and what current science can and cannot claim.
+            </p>
+          </Link>
+        </div>
       </section>
+
 
       <LatestArticlesArchive latestArticles={latestArticles} />
  <FeaturedEssays />
