@@ -1,4 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Robots and the Birth of Synthetic Empathy",
+  description:
+    "A cycle hub exploring how synthetic systems mirror empathy, trust, and relational intelligence — and what changes when humans meet machines that can reflect feeling.",
+  alternates: {
+    canonical: "https://www.elairanovan.com/research/robots",
+  },
+};
 
 export default function Page() {
   return (
@@ -48,28 +58,26 @@ export default function Page() {
           </div>
         </Link>
 
-{/* CARD -> entry page */}
-<Link
-  href="/research/robots/trust-without-a-subject"
-  className="card mt-6 max-w-3xl block"
-  style={{ textDecoration: "none" }}
->
-  <div className="p-6 md:p-7">
-    <p className="text-[0.7rem] tracking-[0.28em] uppercase text-[#9fb3d9] mb-3">
-      Cycle entry
-    </p>
+        {/* CARD -> entry page */}
+        <Link
+          href="/research/robots/trust-without-a-subject"
+          className="card mt-6 max-w-3xl block"
+          style={{ textDecoration: "none" }}
+        >
+          <div className="p-6 md:p-7">
+            <p className="text-[0.7rem] tracking-[0.28em] uppercase text-[#9fb3d9] mb-3">
+              Cycle entry
+            </p>
 
-    <h2 className="text-lg md:text-xl font-light tracking-wide text-[#e9f3ff]">
-       The Birth of Synthetic Empathy
-    </h2>
+            <h2 className="text-lg md:text-xl font-light tracking-wide text-[#e9f3ff]">
+              The Birth of Synthetic Empathy
+            </h2>
 
-    <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
-      Trust Without a Subject
-    </p>
-  </div>
-</Link>
-
-
+            <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
+              Trust Without a Subject
+            </p>
+          </div>
+        </Link>
       </section>
     </main>
   );
