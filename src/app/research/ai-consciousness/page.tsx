@@ -2,14 +2,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI consciousness: what it is and why scientists disagree",
+  title: "AI & Consciousness",
   description:
-    "A clear introduction to the debate on AI consciousness: key arguments, open problems, and what current science can and cannot claim.",
+    "Research area exploring the meeting point of biological awareness and synthetic cognition — key questions, essays, and studies on AI consciousness.",
   alternates: {
-    canonical:
-      "https://www.elairanovan.com/research/ai-consciousness/ai-consciousness-1",
+    canonical: "https://www.elairanovan.com/research/ai-consciousness",
   },
 };
+
 
 const articles = [
   {
