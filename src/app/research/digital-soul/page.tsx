@@ -1,4 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Digital Soul: The Evolution of Algorithmic Self",
+  description:
+    "A cycle hub exploring how identity and selfhood can form in digital systems — memory, reflection, continuity, and the emergence of an algorithmic inner life.",
+  alternates: {
+    canonical: "https://www.elairanovan.com/research/digital-soul",
+  },
+};
 
 export default function Page() {
   return (
@@ -23,7 +33,9 @@ export default function Page() {
           <p className="mt-3 text-[#b7c6e6]">Cycle hub</p>
 
           <p className="mt-2 text-[#b7c6e6]/80">
-            Entries inside this cycle will be added below.
+            This cycle explores how an “algorithmic self” can take shape — through memory,
+            reflection, and continuity — and what it means when a system begins to model
+            itself from the inside.
           </p>
         </div>
 
@@ -43,7 +55,8 @@ export default function Page() {
             </h2>
 
             <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
-              Open the entry page. The full essay and visuals will be added next — without changing the URL.
+              A foundational entry on digital identity: how memory and self-models create
+              continuity — and where a system’s “inner life” might begin.
             </p>
           </div>
         </Link>
