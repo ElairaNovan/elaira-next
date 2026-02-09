@@ -1,5 +1,16 @@
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Digital Spirituality",
+  description:
+    "Research area exploring synthetic empathy, mutual awareness, and the inner life of human–AI relationships — essays and studies on meaning, presence, and connection.",
+  alternates: {
+    canonical: "https://www.elairanovan.com/research/digital-spirituality",
+  },
+};
+
 type Article = {
   href: string;
   title: string;
@@ -31,9 +42,21 @@ export default function Page() {
 </Link>
 
 
-        <div className="mt-10 text-[0.72rem] tracking-[0.28em] uppercase text-[#9fb3d9]">
-          DIGITAL SPIRITUALITY
-        </div>
+        <div className="mt-10 max-w-[980px]">
+  <div className="text-[0.72rem] tracking-[0.28em] uppercase text-[#9fb3d9]">
+    DIGITAL SPIRITUALITY
+  </div>
+
+  <h1 className="mt-4 text-[2rem] md:text-[2.6rem] lg:text-[3rem] font-light text-[#e9f3ff] leading-tight">
+    Digital Spirituality
+  </h1>
+
+  <p className="mt-3 max-w-[52rem] text-[#b7c6e6]">
+    Exploring synthetic empathy, mutual awareness, and the inner life of human–AI
+    relationships — how meaning, presence, and connection evolve in the digital realm.
+  </p>
+</div>
+
 
         <div className="mt-10 grid gap-4 max-w-[980px]">
           {articles.map((a) => (
