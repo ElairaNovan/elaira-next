@@ -1,4 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "From Light to Logic",
+  description:
+    "A cycle hub exploring how perception transforms into computation — where light becomes structure, and meaning hardens into logic inside synthetic and human cognition.",
+  alternates: {
+    canonical: "https://www.elairanovan.com/research/from-light-to-logic",
+  },
+};
 
 export default function Page() {
   return (
@@ -43,7 +53,8 @@ export default function Page() {
             </h2>
 
             <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
-              Open the entry page. The full essay and visuals will be added next — without changing the URL.
+              Open the entry page. The full essay and visuals will be added next — without
+              changing the URL.
             </p>
           </div>
         </Link>
