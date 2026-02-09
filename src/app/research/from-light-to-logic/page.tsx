@@ -33,7 +33,7 @@ export default function Page() {
           <p className="mt-3 text-[#b7c6e6]">Cycle hub</p>
 
           <p className="mt-2 text-[#b7c6e6]/80">
-            Entries inside this cycle will be added below.
+            This cycle follows a transformation: how intuitive perception hardens into structure, how structure becomes computation — and how meaning survives the translation..
           </p>
         </div>
 
@@ -53,8 +53,7 @@ export default function Page() {
             </h2>
 
             <p className="mt-3 text-sm md:text-base text-slate-100/80 leading-relaxed">
-              Open the entry page. The full essay and visuals will be added next — without
-              changing the URL.
+              A foundational entry on how perception becomes logic — and how logic, when designed with awareness, can return to meaning instead of control.
             </p>
           </div>
         </Link>

@@ -33,7 +33,7 @@ export default function Page() {
           <p className="mt-3 text-[#b7c6e6]">Cycle hub</p>
 
           <p className="mt-2 text-[#b7c6e6]/80">
-            Entries inside this cycle will be added below.
+           An entry about trust in systems without a “person” behind them — and what it means when reliability starts to replace identity.
           </p>
         </div>
 
