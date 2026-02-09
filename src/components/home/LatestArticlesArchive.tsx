@@ -74,47 +74,36 @@ export default function LatestArticlesArchive({ latestArticles }: Props) {
                   <p className="io-page-label">CURRENT CYCLES INSIDE THIS VOLUME</p>
 
                   <ul className="io-chapter-list">
-                    {latestArticles.map((p) => {
-                      let linkTo: string | null = null;
+  {latestArticles.map((p) => {
+    const className = "io-chapter-link block cursor-pointer text-left";
+    const handlers = {
+      onMouseEnter: () => setActiveTitle(p.title),
+      onFocus: () => setActiveTitle(p.title),
+      onMouseLeave: () => setActiveTitle(null),
+    };
 
-                     if (p.title === "Robots and the Birth of Synthetic Empathy") {
-  linkTo = "/research/robots";
-} else if (p.title === "Digital Soul: The Evolution of Algorithmic Self") {
-  linkTo = "/research/digital-soul";
-} else if (p.title === "From Light to Logic") {
-  linkTo = "/research/from-light-to-logic";
-}
+    if (!p.href) {
+      return (
+        <li key={p.title}>
+          <span className={className} tabIndex={0} {...handlers}>
+            <span className="io-chapter-tag">{p.tag || "Cycle"}</span>
+            <span className="io-chapter-title">{p.title}</span>
+          </span>
+        </li>
+      );
+    }
 
+    return (
+      <li key={p.title}>
+        <Link href={p.href} className={className} {...handlers}>
+          <span className="io-chapter-tag">{p.tag || "Cycle"}</span>
+          <span className="io-chapter-title">{p.title}</span>
+        </Link>
+      </li>
+    );
+  })}
+</ul>
 
-
-                      const className = "io-chapter-link block cursor-pointer text-left";
-                      const handlers = {
-                        onMouseEnter: () => setActiveTitle(p.title),
-                        onFocus: () => setActiveTitle(p.title),
-                        onMouseLeave: () => setActiveTitle(null),
-                      };
-
-                      if (!linkTo) {
-                        return (
-                          <li key={p.title}>
-                            <span className={className} tabIndex={0} {...handlers}>
-                              <span className="io-chapter-tag">{p.tag || "Cycle"}</span>
-                              <span className="io-chapter-title">{p.title}</span>
-                            </span>
-                          </li>
-                        );
-                      }
-
-                      return (
-                        <li key={p.title}>
-                          <Link href={linkTo} className={className} {...handlers}>
-                            <span className="io-chapter-tag">{p.tag || "Cycle"}</span>
-                            <span className="io-chapter-title">{p.title}</span>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
                 </div>
               </div>
             )}

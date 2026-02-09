@@ -48,10 +48,23 @@ const researchAreas: ResearchArea[] = [
 ];
 
 const latestArticles = [
-  { title: "Robots and the Birth of Synthetic Empathy", tag: "Cycle" },
-  { title: "Digital Soul: The Evolution of Algorithmic Self", tag: "Cycle" },
-  { title: "From Light to Logic", tag: "Cycle" },
+  {
+    title: "Robots and the Birth of Synthetic Empathy",
+    tag: "Cycle",
+    href: "/research/robots",
+  },
+  {
+    title: "Digital Soul: The Evolution of Algorithmic Self",
+    tag: "Cycle",
+    href: "/research/digital-soul",
+  },
+  {
+    title: "From Light to Logic",
+    tag: "Cycle",
+    href: "/research/from-light-to-logic",
+  },
 ];
+
 
 export default function HomeClient() {
 
