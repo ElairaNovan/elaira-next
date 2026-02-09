@@ -26,7 +26,8 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Elaira Novan is a philosophical and research space exploring the convergence of human intelligence and artificial minds.",
+  "Elaira Novan — a space of research, essays, and dialogue on human and artificial intelligence.",
+
 
   openGraph: {
     title: "Elaira Novan",
