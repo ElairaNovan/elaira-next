@@ -1,4 +1,14 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Future Aesthetics",
+  description:
+    "Research area exploring visual language, symbolic systems, and the design of tomorrow — how form becomes meaning, navigation, and orientation in complex futures.",
+  alternates: {
+    canonical: "https://www.elairanovan.com/research/future-aesthetics",
+  },
+};
 
 type Article = {
   href: string;
