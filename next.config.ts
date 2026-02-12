@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
       // OLD slug → NEW slug
       {
         source: "/research/aesthetics",
-        destination: "/future-aesthetics",
+        destination: "/research/future-aesthetics",
         permanent: true,
       },
     ];
